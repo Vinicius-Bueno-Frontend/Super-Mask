@@ -5,12 +5,14 @@ import * as SQLite from "expo-sqlite";
 import { Image, StyleSheet } from "react-native";
 import { TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const db = SQLite.openDatabase("maskeddb.banco");
+const StackPagamento = createStackNavigator();
 
-export default function Carrinho() {
+export default function Carrinho({ navigation }) {
   const [dados, setDados] = React.useState([]);
-  const [quantidade, setQuantidade] = React.useState(1);
+  const [quantidade, setQuantidade] = React.useState("1");
 
   React.useEffect(() => {
     db.transaction((tx) => {
@@ -24,9 +26,9 @@ export default function Carrinho() {
     <View style={{ flex: 1 }}>
       <Text>Veja o que tem no carrinho</Text>
       {dados.map(({ id, idproduto, nomeproduto, preco, foto }) => (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }} key={idproduto}>
           <Image
-            source={{ uri: `http://192.168.15.11/maskedapi/img/${foto}` }}
+            source={{ uri: `http://192.168.15.2/maskedapi/img/${foto}` }}
             style={tela.img}
           />
           <Text>Produto:{nomeproduto}</Text>
@@ -44,12 +46,16 @@ export default function Carrinho() {
               });
             }}
           >
-            <Text>Tira do Carrinho</Text>
+            <Text>Retirar do Carrinho</Text>
           </TouchableOpacity>
         </View>
       ))}
-      <TouchableOpacity>
-        <Text>Ir para pgamento</Text>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Pagamento");
+        }}
+      >
+        <Text>Comprar</Text>
       </TouchableOpacity>
     </View>
   );

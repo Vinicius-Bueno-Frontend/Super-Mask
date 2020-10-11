@@ -1,6 +1,7 @@
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Image } from "react-native";
 import * as React from "react";
 
 import Colors from "../constants/Colors";
@@ -10,6 +11,7 @@ import Perfil from "../screens/Perfil";
 import Login from "../screens/Login";
 import Cadastrar from "../screens/Cadastrar";
 import Carrinho from "../screens/Carrinho";
+import Pagamento from "../screens/Pagamento";
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from "../types";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -27,7 +29,7 @@ export default function BottomTabNavigator() {
         component={InicialNavegador}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <TabBarIcon2 name="home" size={25} color={color} />
           ),
         }}
       />
@@ -36,7 +38,7 @@ export default function BottomTabNavigator() {
         component={PerfilNavegador}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <TabBarIcon2 name="user-alt" size={25} color={color} />
           ),
         }}
       />
@@ -45,7 +47,7 @@ export default function BottomTabNavigator() {
         component={CarrinhoNavegador}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <TabBarIcon2 name="shopping-cart" size={25} color={color} />
           ),
         }}
       />
@@ -63,6 +65,15 @@ export default function BottomTabNavigator() {
         component={CadastrarNavegador}
         options={{
           tabBarIcon: ({ color }) => (
+            <TabBarIcon2 name="user-plus" size={25} color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Pagamento"
+        component={PagamentoNavegador}
+        options={{
+          tabBarIcon: ({ color }) => (
             <TabBarIcon name="ios-code" color={color} />
           ),
         }}
@@ -77,8 +88,22 @@ function TabBarIcon(props: { name: string; color: string }) {
   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 
+function TabBarIcon2(props: { name: string; color: string }) {
+  return <FontAwesome5 size={30} style={{ marginBottom: -3 }} {...props} />;
+}
+
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
+
+//function LogoTitle() {
+//return (
+//<Image
+// style={{ width: 50, height: 50 }}
+// source={require("../assets/images/logomaskicon.png")}
+// />
+/// );
+//}
+
 const InicialStack = createStackNavigator<TabOneParamList>();
 
 function InicialNavegador() {
@@ -87,7 +112,11 @@ function InicialNavegador() {
       <InicialStack.Screen
         name="Inicial"
         component={Inicial}
-        options={{ headerTitle: "THE MASKED" }}
+        options={{
+          headerBackImage: () => (
+            <Image source={require("../assets/images/logomaskicon2.png")} />
+          ),
+        }}
       />
     </InicialStack.Navigator>
   );
@@ -129,7 +158,11 @@ function LoginNavegador() {
       <LoginStack.Screen
         name="Login"
         component={Login}
-        options={{ headerTitle: "Login" }}
+        options={{
+          headerBackImage: () => (
+            <Image source={require("../assets/images/logomaskicon2.png")} />
+          ),
+        }}
       />
     </LoginStack.Navigator>
   );
@@ -143,8 +176,22 @@ function CadastrarNavegador() {
       <CadastrarStack.Screen
         name="Cadastrar"
         component={Cadastrar}
-        options={{ headerTitle: "Cadastrar" }}
+        options={{ headerTitle: "Cadastro" }}
       />
     </CadastrarStack.Navigator>
+  );
+}
+
+const PagamentoStack = createStackNavigator<TabTwoParamList>();
+
+function PagamentoNavegador() {
+  return (
+    <PagamentoStack.Navigator>
+      <PagamentoStack.Screen
+        name="Pagamento"
+        component={Pagamento}
+        options={{ headerTitle: "Pagamento" }}
+      />
+    </PagamentoStack.Navigator>
   );
 }

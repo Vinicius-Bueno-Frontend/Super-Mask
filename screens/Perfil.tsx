@@ -43,7 +43,7 @@ export default function Perfil() {
         }) => (
           <View style={{ flex: 1 }}>
             <Image
-              source={{ uri: `http://192.168.15.11/maskedapi/img/${foto}` }}
+              source={{ uri: `http://192.168.15.2/maskedapi/img/${foto}` }}
               style={tela.img}
             />
             <Text>Usuário:{nomeusuario}</Text>

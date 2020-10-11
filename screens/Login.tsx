@@ -26,43 +26,50 @@ export default function Login({ navigation }) {
 
   return (
     <View style={estilo.area}>
-      <Image
-        source={require("../assets/images/logomaskicon.png")}
-        style={estilo.logo}
-      />
-
-      <TextInput
-        placeholder="Usuário"
-        style={estilo.acesso}
-        onChangeText={(value) => setUsuario(value)}
-        value={usuario}
-      />
-
-      <TextInput
-        secureTextEntry
-        placeholder="Senha"
-        style={estilo.acesso}
-        onChangeText={(value) => setSenha(value)}
-        value={senha}
-      />
-
-      <TouchableOpacity
-        style={estilo.logar}
-        onPress={() => {
-          us = usuario;
-          sh = senha;
-          logar();
-        }}
+      <ImageBackground
+        source={require("../assets/images/fundoalternativo.jpg")}
+        style={estilo.fundo}
       >
-        <Text style={estilo.txtLogar}> Logar </Text>
-      </TouchableOpacity>
+        <Image
+          source={require("../assets/images/logomaskicon2.png")}
+          style={estilo.logo}
+        />
 
-      <TouchableOpacity
-        style={estilo.cadastrar}
-        onPress={() => navigation.navigate("Cadastrar")}
-      >
-        <Text style={estilo.txtCadastrar}> Cadastrar </Text>
-      </TouchableOpacity>
+        <TextInput
+          placeholder="Nome de Usuário"
+          placeholderTextColor="grey"
+          style={estilo.acesso}
+          onChangeText={(value) => setUsuario(value)}
+          value={usuario}
+        />
+
+        <TextInput
+          secureTextEntry
+          placeholder="Senha"
+          placeholderTextColor="grey"
+          style={estilo.acesso}
+          onChangeText={(value) => setSenha(value)}
+          value={senha}
+        />
+
+        <TouchableOpacity
+          style={estilo.logar}
+          onPress={() => {
+            us = usuario;
+            sh = senha;
+            logar();
+          }}
+        >
+          <Text style={estilo.txtLogar}> Logar </Text>
+        </TouchableOpacity>
+        <Text style={estilo.txtOU}>OU</Text>
+        <TouchableOpacity
+          style={estilo.cadastrar}
+          onPress={() => navigation.navigate("Cadastrar")}
+        >
+          <Text style={estilo.txtCadastrar}> Cadastrar </Text>
+        </TouchableOpacity>
+      </ImageBackground>
     </View>
   );
 
@@ -81,32 +88,38 @@ const estilo = StyleSheet.create({
     justifyContent: "center",
   },
 
+  fundo: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+  },
+
   acesso: {
     backgroundColor: "transparent",
     color: "red",
     padding: 10,
     width: "60%",
-    margin: 5,
+    margin: 7,
     marginLeft: "auto",
     marginRight: "auto",
     borderBottomWidth: 1,
-    borderBottomColor: "white",
+    borderBottomColor: "lightgrey",
   },
 
   logar: {
     width: "60%",
     paddingVertical: 10,
     paddingHorizontal: 10,
-    backgroundColor: "transparent",
+    backgroundColor: "white",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: 30,
-    borderColor: "#0d47a1",
+    marginTop: 55,
+    borderColor: "white",
     borderRadius: 25,
     borderWidth: 3,
   },
   txtLogar: {
-    color: "white",
+    color: "black",
     fontWeight: "bold",
     textAlign: "center",
     fontSize: 15,
@@ -119,8 +132,8 @@ const estilo = StyleSheet.create({
     backgroundColor: "transparent",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: 60,
-    borderColor: "#0d47a1",
+    //marginTop:
+    borderColor: "#ffffff",
     borderWidth: 3,
     borderRadius: 25,
   },
@@ -131,12 +144,18 @@ const estilo = StyleSheet.create({
     fontSize: 15,
   },
 
+  txtOU: {
+    fontWeight: "bold",
+    textAlign: "center",
+    margin: 30,
+  },
+
   logo: {
     width: 150,
-    height: 150,
+    height: 100,
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom: 40,
+    marginBottom: 50,
   },
 
   fundo: {
@@ -147,7 +166,7 @@ const estilo = StyleSheet.create({
 });
 
 function logar() {
-  fetch("http://192.168.15.11/maskedapi/service/usuario/login.php", {
+  fetch("http://192.168.15.2/maskedapi/service/usuario/login.php", {
     method: "POST",
     headers: {
       Accept: "application/json",

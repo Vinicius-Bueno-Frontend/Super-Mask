@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Text, View } from "../components/Themed";
+import Carousel from "@khanshamshad32/carousel";
 import { ActivityIndicator, Image, StyleSheet } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
@@ -12,7 +13,7 @@ export default function DetalheProduto({ route }) {
 
   React.useEffect(() => {
     fetch(
-      `http://192.168.15.11/maskedapi/service/produto/detalheproduto.php?idproduto=${idproduto}`
+      `http://192.168.15.2/maskedapi/service/produto/detalheproduto.php?idproduto=${idproduto}`
     )
       .then((response) => response.json())
       .then((produto) => setDados(produto.saida))
@@ -33,28 +34,23 @@ export default function DetalheProduto({ route }) {
             <View>
               <Image
                 source={{
-                  uri: `http://192.168.15.11/maskedapi/img/${item.foto1}`,
+                  uri: `http://192.168.15.2/maskedapi/img/${item.foto1}`,
                 }}
                 style={tela.img}
               />
               <Image
                 source={{
-                  uri: `http://192.168.15.11/maskedapi/img/${item.foto2}`,
+                  uri: `http://192.168.15.2/maskedapi/img/${item.foto3}`,
                 }}
                 style={tela.img}
               />
               <Image
                 source={{
-                  uri: `http://192.168.15.11/maskedapi/img/${item.foto3}`,
+                  uri: `http://192.168.15.2/maskedapi/img/${item.foto4}`,
                 }}
                 style={tela.img}
               />
-              <Image
-                source={{
-                  uri: `http://192.168.15.11/maskedapi/img/${item.foto4}`,
-                }}
-                style={tela.img}
-              />
+
               <Text>{item.nomeproduto}</Text>
               <Text>{item.descricao}</Text>
               <Text>{item.preco}</Text>

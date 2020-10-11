@@ -29,9 +29,7 @@ function Produtos({ navigation }) {
   //Executar a consulta listartelainicial
 
   React.useEffect(() => {
-    fetch(
-      "http://192.168.15.11/maskedapi/service/produto/listartelainicial.php"
-    )
+    fetch("http://192.168.15.2/maskedapi/service/produto/listartelainicial.php")
       .then((response) => response.json())
       .then((produtos) => setDados(produtos.saida))
       .catch((error) => console.error(error))
@@ -42,7 +40,7 @@ function Produtos({ navigation }) {
     <View>
       <ScrollView>
         <Image
-          source={require("../assets/images/logomaskicon.png")}
+          source={require("../assets/images/logomaskicon2.png")}
           style={tela.imagem}
         />
 
@@ -55,7 +53,7 @@ function Produtos({ navigation }) {
               <View>
                 <Image
                   source={{
-                    uri: `http://192.168.15.11/maskedapi/img/${item.foto}`,
+                    uri: `http://192.168.15.2/maskedapi/img/${item.foto}`,
                   }}
                   style={tela.img}
                 />
@@ -84,6 +82,8 @@ function Produtos({ navigation }) {
 
 const tela = StyleSheet.create({
   imagem: {
+    width: 150,
+    height: 100,
     marginLeft: "auto",
     marginRight: "auto",
   },
@@ -114,7 +114,6 @@ const tela = StyleSheet.create({
   nome: {
     textAlign: "center",
     padding: 10,
-    fontFamily: "Varela Round, sans-serif",
   },
   preco: {
     textAlign: "center",
